@@ -48,7 +48,7 @@ let generateCard = (data) => {
 
   //set themeColor based on the pokemon type
   const themeColor = typeColor[data.types[0].type.name];
-
+  console.log(data);
   card.innerHTML = `<p class="hp"><span>HP</span> ${hp}</p>
         <img src="${imgSrc}" />
         <h2 class="poke-name">${pokeName}</h2>
