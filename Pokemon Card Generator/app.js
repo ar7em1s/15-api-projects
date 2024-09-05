@@ -40,8 +40,6 @@ let getPokeData = () => {
 let generateCard = (data) => {
   //get nesessary data and assign it to vartiables
   const hp = data.stats[0].base_stat;
-  console.log(data);
-
   const imgSrc = data.sprites.other.dream_world.front_default;
   const pokeName = data.name[0].toUpperCase() + data.name.slice(1);
   const statAttack = data.stats[1].base_stat;
