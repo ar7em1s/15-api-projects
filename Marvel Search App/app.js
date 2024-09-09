@@ -6,6 +6,41 @@ let date = new Date();
 
 const [timestamp, apiKey, hashValue] = [ts, publicKey, hashVal];
 
+function removeElements() {
+  listContainer.innerHTML = "";
+}
+
+function displayWords(value) {
+  input.value = value;
+  removeElements();
+}
+
+input.addEventListener("keyup", async () => {
+  removeElements();
+  if (input.value.length < 3) {
+    return false;
+  }
+
+  const url = `https://gateway.marvel.com:443/v1/public/characters?ts=${timestamp}&apikey=${apiKey}&hash=${hashVal}&nameStartsWith${input.value}`;
+  const response = await fetch(url);
+  const jsonData = await response.json();
+
+  jsonData.data["results"].forEach((result) => {
+    let name = result.name;
+    let div = document.createElement("div");
+
+    div.style.cursor = "pointer";
+    div.classList.add("autocomplete-items");
+    div.setAttribute("onclick", `displayWords("${name}")`);
+
+    let word = "<b>" + name.substr(0, input.value.length) + "</b>";
+
+    word += name.substr(input.value.length);
+    div.innerHTML = `<p class="item">${word}</p>`;
+    listContainer.appendChild(div);
+  });
+});
+
 button.addEventListener(
   "click",
   (getResult = async () => {
