@@ -45,4 +45,12 @@ fetch(url + "pizza")
     let recipe = document.getElementById("recipe");
     let hideRecipe = document.getElementById("hide-recipe");
     let showRecie = document.getElementById("show-recipe");
+
+    //creating 'ul' parent and appending all 'li' children, appending the parent to the container
+    ingredients.forEach((i) => {
+      let child = document.createElement("li");
+      child.innerText = i;
+      parent.appendChild(child);
+      ingredientCon.appendChild(parent);
+    });
   });
