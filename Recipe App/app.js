@@ -25,7 +25,6 @@ searchBtn.addEventListener("click", () => {
             ingredients.push(`${measure} ${ingredient}`);
           }
         }
-        console.log(ingredients);
 
         result.innerHTML = `<img src=${myMeal.strMealThumb}> <div class="details">
         <h2>${myMeal.strMeal}</h2>
@@ -59,6 +58,9 @@ searchBtn.addEventListener("click", () => {
         showRecipe.addEventListener("click", () => {
           recipe.style.display = "block";
         });
+      })
+      .catch(() => {
+        result.innerHTML = `<h3>Invalid input. Try again!</h3>`;
       });
   }
 });
