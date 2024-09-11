@@ -29,7 +29,20 @@ fetch(url + "pizza")
     }
     console.log(ingredients);
 
-    result.innerHTML = `<img src=${myMeal.strMealThumb}>
-    
-    `;
+    result.innerHTML = `<img src=${myMeal.strMealThumb}> <div class="details">
+        <h2>${myMeal.strMeal}</h2>
+        <h4>${myMeal.strArea}</h4>
+      </div>
+      <div id="ingredient-container"></div>
+      <div id="recipe">
+        <button id="hide-recipe">Hide Recipe</button>
+        <pre id="instructions">${myMeal.strInstructions}</pre>
+    </div>
+    <button id="show-recipe">View Recipe</button>`;
+
+    let ingredientCon = document.getElementById("ingredient-container");
+    let parent = document.createElement("ul");
+    let recipe = document.getElementById("recipe");
+    let hideRecipe = document.getElementById("hide-recipe");
+    let showRecie = document.getElementById("show-recipe");
   });
