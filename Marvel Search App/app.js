@@ -29,6 +29,7 @@ input.addEventListener("keyup", async () => {
   jsonData.data.results.forEach((result) => {
     let name = result.name;
     let div = document.createElement("div");
+    console.log(name);
 
     div.style.cursor = "pointer";
     div.classList.add("autocomplete-items");

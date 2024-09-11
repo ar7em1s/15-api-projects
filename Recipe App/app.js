@@ -1,6 +1,45 @@
 let result = document.getElementById("result");
 let searchBtn = document.getElementById("search-btn");
+let listContainer = document.querySelector(".list");
 let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+let userInp = document.getElementById("user-input");
+
+function removeElements() {
+  listContainer.innerHTML = "";
+}
+
+function displayWords(value) {
+  userInp.value = value;
+  removeElements();
+}
+
+function clearInput() {
+  userInp.value = "";
+}
+
+userInp.addEventListener("keyup", async () => {
+  removeElements();
+  if (userInp.value.length <= 3) {
+    return false;
+  }
+
+  const responseRes = await fetch(url + userInp.value);
+  const jsonData = await responseRes.json();
+
+  jsonData.meals.forEach((meal) => {
+    let mealName = meal.strMeal;
+    let mealDiv = document.createElement("div");
+
+    mealDiv.style.cursor = "pointer";
+    mealDiv.classList.add("autocomplete");
+    mealDiv.setAttribute("onclick", `displayWords("${mealName}")`);
+
+    let word = "<b>" + mealName + "</b>";
+
+    mealDiv.innerHTML = `<p class="item">${word}</p>`;
+    listContainer.appendChild(mealDiv);
+  });
+});
 
 searchBtn.addEventListener("click", () => {
   let userInp = document.getElementById("user-input").value;
@@ -62,5 +101,6 @@ searchBtn.addEventListener("click", () => {
       .catch(() => {
         result.innerHTML = `<h3>Invalid input. Try again!</h3>`;
       });
+    clearInput();
   }
 });
