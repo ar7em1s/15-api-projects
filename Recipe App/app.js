@@ -6,30 +6,28 @@ searchBtn.addEventListener("click", () => {
   let userInp = document.getElementById("user-input").value;
   if (userInp.length == 0) {
     result.innerHTML = `<h3>Input field cannot be empty!</h3>`;
-  }
-});
+  } else {
+    fetch(url + userInp)
+      .then((response) => response.json())
+      .then((data) => {
+        let myMeal = data.meals[0];
+        let count = 1;
+        let ingredients = [];
 
-fetch(url + "pizza")
-  .then((response) => response.json())
-  .then((data) => {
-    let myMeal = data.meals[0];
-    let count = 1;
-    let ingredients = [];
+        for (let i in myMeal) {
+          let ingredient = "";
+          let measure = "";
 
-    for (let i in myMeal) {
-      let ingredient = "";
-      let measure = "";
+          if (i.startsWith("strIngredient") && myMeal[i]) {
+            ingredient = myMeal[i];
+            measure = myMeal[`strMeasure` + count];
+            count++;
+            ingredients.push(`${measure} ${ingredient}`);
+          }
+        }
+        console.log(ingredients);
 
-      if (i.startsWith("strIngredient") && myMeal[i]) {
-        ingredient = myMeal[i];
-        measure = myMeal[`strMeasure` + count];
-        count++;
-        ingredients.push(`${measure} ${ingredient}`);
-      }
-    }
-    console.log(ingredients);
-
-    result.innerHTML = `<img src=${myMeal.strMealThumb}> <div class="details">
+        result.innerHTML = `<img src=${myMeal.strMealThumb}> <div class="details">
         <h2>${myMeal.strMeal}</h2>
         <h4>${myMeal.strArea}</h4>
       </div>
@@ -40,25 +38,27 @@ fetch(url + "pizza")
     </div>
     <button id="show-recipe">View Recipe</button>`;
 
-    let ingredientCon = document.getElementById("ingredient-container");
-    let parent = document.createElement("ul");
-    let recipe = document.getElementById("recipe");
-    let hideRecipe = document.getElementById("hide-recipe");
-    let showRecipe = document.getElementById("show-recipe");
+        let ingredientCon = document.getElementById("ingredient-container");
+        let parent = document.createElement("ul");
+        let recipe = document.getElementById("recipe");
+        let hideRecipe = document.getElementById("hide-recipe");
+        let showRecipe = document.getElementById("show-recipe");
 
-    //creating 'ul' parent and appending all 'li' children, appending the parent to the container
-    ingredients.forEach((i) => {
-      let child = document.createElement("li");
-      child.innerText = i;
-      parent.appendChild(child);
-      ingredientCon.appendChild(parent);
-    });
+        //creating 'ul' parent and appending all 'li' children, appending the parent to the container
+        ingredients.forEach((i) => {
+          let child = document.createElement("li");
+          child.innerText = i;
+          parent.appendChild(child);
+          ingredientCon.appendChild(parent);
+        });
 
-    hideRecipe.addEventListener("click", () => {
-      recipe.style.display = "none";
-    });
+        hideRecipe.addEventListener("click", () => {
+          recipe.style.display = "none";
+        });
 
-    showRecipe.addEventListener("click", () => {
-      recipe.style.display = "block";
-    });
-  });
+        showRecipe.addEventListener("click", () => {
+          recipe.style.display = "block";
+        });
+      });
+  }
+});
