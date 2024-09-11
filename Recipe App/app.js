@@ -65,7 +65,7 @@ searchBtn.addEventListener("click", () => {
           }
         }
 
-        result.innerHTML = `<img src=${myMeal.strMealThumb}> <div class="details">
+        result.innerHTML = `<div class="image-container"><img src=${myMeal.strMealThumb}></div> <div class="details">
         <h2>${myMeal.strMeal}</h2>
         <h4>${myMeal.strArea}</h4>
       </div>
