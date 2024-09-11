@@ -113,6 +113,7 @@ img {
   top: 1.2em;
   left: 90%;
   border-radius: 0.3em;
+  cursor: pointer;
 }
 
 ul {
@@ -122,4 +123,10 @@ ul {
   grid-template-columns: auto auto;
   gap: 0.8em 1.1em;
   padding: 1.2em 0 0 1.2em;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    font-size: 14px;
+  }
 }

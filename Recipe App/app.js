@@ -1,18 +1,18 @@
 let result = document.getElementById("result");
 let searchBtn = document.getElementById("search-btn");
 let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-let userInp = document.getElementById("user-input").value;
+
+searchBtn.addEventListener("click", () => {
+  let userInp = document.getElementById("user-input").value;
+  if (userInp.length == 0) {
+    result.innerHTML = `<h3>Input field cannot be empty!</h3>`;
+  }
+});
 
 fetch(url + "pizza")
   .then((response) => response.json())
   .then((data) => {
     let myMeal = data.meals[0];
-    console.log(myMeal);
-    // console.log(myMeal.strMeal);
-    // console.log(myMeal.strArea);
-    // console.log(myMeal.strInstructions);
-    // console.log(myMeal.strMealThumb);
-
     let count = 1;
     let ingredients = [];
 
@@ -35,7 +35,7 @@ fetch(url + "pizza")
       </div>
       <div id="ingredient-container"></div>
       <div id="recipe">
-        <button id="hide-recipe">Hide Recipe</button>
+        <button id="hide-recipe">X</button>
         <pre id="instructions">${myMeal.strInstructions}</pre>
     </div>
     <button id="show-recipe">View Recipe</button>`;
@@ -44,7 +44,7 @@ fetch(url + "pizza")
     let parent = document.createElement("ul");
     let recipe = document.getElementById("recipe");
     let hideRecipe = document.getElementById("hide-recipe");
-    let showRecie = document.getElementById("show-recipe");
+    let showRecipe = document.getElementById("show-recipe");
 
     //creating 'ul' parent and appending all 'li' children, appending the parent to the container
     ingredients.forEach((i) => {
@@ -52,5 +52,13 @@ fetch(url + "pizza")
       child.innerText = i;
       parent.appendChild(child);
       ingredientCon.appendChild(parent);
+    });
+
+    hideRecipe.addEventListener("click", () => {
+      recipe.style.display = "none";
+    });
+
+    showRecipe.addEventListener("click", () => {
+      recipe.style.display = "block";
     });
   });
