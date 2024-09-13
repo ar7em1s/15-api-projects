@@ -38,6 +38,27 @@ button {
 }
 
 .wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-container {
+  background-color: #2b304d;
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1.5em;
+  border-radius: 0.5em;
+}
+
+.card-container img {
+  width: 100%;
+}
+
+.card-container button {
+  margin-top: 1em;
+  padding: 1em 0;
 }
 
 .loader {
@@ -57,5 +78,21 @@ button {
 @keyframes spin {
   100% {
     transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .container {
+    margin: 0.7em;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .wrapper {
+    grid-template-columns: 1fr;
   }
 }
