@@ -7,8 +7,6 @@ searchBtn.addEventListener("click", () => {
   fetch(finalURL)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-
       result.innerHTML = `<img src="${data[0].flags.svg}" class="flag-img">
       <h2>${data[0].name.common}</h2>
       <div class="wrapper">
@@ -38,6 +36,20 @@ searchBtn.addEventListener("click", () => {
             <span>${data[0].currencies[Object.keys(data[0].currencies)].name} (${data[0].currencies[Object.keys(data[0].currencies)].symbol})</span>
         </div>
       </div>
+
+      <div class="wrapper">
+        <div class="data-wrapper">
+            <h4>Language:</h4>
+            <span>${Object.values(data[0].languages).toString().split(",").join(", ")}</span>
+        </div>
+      </div>
     `;
+    })
+    .catch(() => {
+      if (countryName.length == 0) {
+        result.innerHTML = `<h3>Input field cannot be empty!</h3>`;
+      } else {
+        result.innerHTML = `<h3>Please, enter a valid country.</h3>`;
+      }
     });
 });
