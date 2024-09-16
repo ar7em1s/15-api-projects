@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dictionary</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/0414bac561.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <audio id="sound"></audio>
+    <div class="container">
+      <div class="search-box">
+        <input type="text" placeholder="Type a word here..." id="input-word" />
+        <button id="search-btn">Search</button>
+      </div>
+      <div class="result" id="result">
+        <div class="word">
+          <h3>SampleWord</h3>
+          <button>
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+        </div>
+        <div class="details">
+          <p>pos</p>
+          <p>/sample/</p>
+        </div>
+        <p class="word-meaning">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatem sunt fugit hic magnam.</p>
+        <p class="word-example">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
